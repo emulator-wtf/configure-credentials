@@ -13,3 +13,7 @@ jobs:
     - uses: jdx/mise-action@v2
     - run: mise dist
     - uses: ./
+      with:
+        oidc-configuration-id: '414eac8b-5d17-4860-915f-37329ceb1dff'
+    - uses: emulator-wtf/setup-ew-cli@v0
+    - run: ew-cli --models
