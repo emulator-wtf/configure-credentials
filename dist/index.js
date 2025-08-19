@@ -40,19 +40,33 @@ var core_1 = require("@actions/core");
 var api_1 = require("./api");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var oidcConfigurationUuid, oidcToken, response;
+        var oidcConfigurationUuid, oidcToken, response, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    oidcConfigurationUuid = (0, core_1.getInput)('configuration-id', { required: true });
-                    return [4, (0, core_1.getIDToken)('api://emulator.wtf')];
+                    oidcConfigurationUuid = (0, core_1.getInput)('oidc-configuration-id', { required: true });
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4, (0, core_1.getIDToken)('api://emulator.wtf')];
+                case 2:
                     oidcToken = _a.sent();
                     return [4, (0, api_1.authenticateOidc)({ oidcConfigurationUuid: oidcConfigurationUuid, oidcToken: oidcToken })];
-                case 2:
+                case 3:
                     response = _a.sent();
                     (0, core_1.exportVariable)('EW_API_TOKEN', response.apiToken);
-                    return [2];
+                    return [3, 5];
+                case 4:
+                    error_1 = _a.sent();
+                    if (error_1 instanceof Error && error_1.message.includes('Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable')) {
+                        throw new Error("This action requires the 'id-token' permission to be set in the workflow. Please add the following to your workflow file:\n\n" +
+                            "permissions:\n  id-token: write\n");
+                    }
+                    else {
+                        throw error_1;
+                    }
+                    return [3, 5];
+                case 5: return [2];
             }
         });
     });
