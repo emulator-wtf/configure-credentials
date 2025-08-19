@@ -2,7 +2,7 @@ import { getInput, getIDToken, exportVariable } from '@actions/core';
 import { authenticateOidc } from './api';
 
 async function run() {
-  const oidcConfigurationUuid = getInput('configuration-id', { required: true });
+  const oidcConfigurationUuid = getInput('oidc-configuration-id', { required: true });
   const oidcToken = await getIDToken('api://emulator.wtf')
 
   // make api request to the OIDC configuration endpoint
