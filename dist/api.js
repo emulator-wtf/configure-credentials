@@ -36,26 +36,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@actions/core");
-var api_1 = require("./api");
-function run() {
+exports.authenticateOidc = authenticateOidc;
+exports.isErrorResponse = isErrorResponse;
+var http_client_1 = require("@actions/http-client");
+function authenticateOidc(request) {
     return __awaiter(this, void 0, void 0, function () {
-        var oidcConfigurationUuid, oidcToken, response;
+        var client, response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    oidcConfigurationUuid = (0, core_1.getInput)('configuration-id', { required: true });
-                    return [4, (0, core_1.getIDToken)('api://emulator.wtf')];
+                    client = new http_client_1.HttpClient();
+                    return [4, client.postJson('https://api.emulator.wtf/auth/oidc', request)];
                 case 1:
-                    oidcToken = _a.sent();
-                    return [4, (0, api_1.authenticateOidc)({ oidcConfigurationUuid: oidcConfigurationUuid, oidcToken: oidcToken })];
-                case 2:
                     response = _a.sent();
-                    (0, core_1.exportVariable)('EW_API_TOKEN', response.apiToken);
-                    return [2];
+                    if (response.statusCode >= 200 && response.statusCode < 300) {
+                        if (response.result == null) {
+                            throw new Error('Unexpected response: null result');
+                        }
+                        if (isErrorResponse(response.result)) {
+                            throw new Error("SHOULD NOT HAPPEN! API Error for a 2xx response: ".concat(response.result.message));
+                        }
+                        return [2, response.result];
+                    }
+                    if (isErrorResponse(response.result)) {
+                        throw new Error("API Error: ".concat(response.result.message));
+                    }
+                    throw Error("API call to emulator.wtf failed with status code ".concat(response.statusCode));
             }
         });
     });
 }
-run();
-//# sourceMappingURL=index.js.map
+function isErrorResponse(body) {
+    return body.type !== undefined && body.message !== undefined;
+}
+//# sourceMappingURL=api.js.map
