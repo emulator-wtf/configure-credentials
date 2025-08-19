@@ -1,4 +1,4 @@
-import { getInput, getIDToken, exportVariable } from '@actions/core'
+import {getInput, getIDToken, exportVariable, setSecret} from '@actions/core'
 import { authenticateOidc } from './api'
 
 async function run() {
@@ -12,6 +12,8 @@ async function run() {
 
     // export EW_API_TOKEN to environment
     exportVariable('EW_API_TOKEN', response.apiToken)
+    // mark it as a secret
+    setSecret(response.apiToken)
   } catch (error) {
     // check for "Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable" error
     if (error instanceof Error && error.message.includes('Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable')) {
