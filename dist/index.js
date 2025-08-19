@@ -55,6 +55,7 @@ function run() {
                 case 3:
                     response = _a.sent();
                     (0, core_1.exportVariable)('EW_API_TOKEN', response.apiToken);
+                    (0, core_1.setSecret)(response.apiToken);
                     return [3, 5];
                 case 4:
                     error_1 = _a.sent();
