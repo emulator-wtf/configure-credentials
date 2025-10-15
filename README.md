@@ -3,7 +3,7 @@
 Emulator.wtf is an Android cloud emulator laser-focused on performance to
 deliver quick feedback to your PRs.
 
-With this action you can use emulator.wtf in your Github Actions workflows
+With this action you can use emulator.wtf in your GitHub Actions workflows
 without having to explicitly specify an API token. The action relies on
 [GitHub OIDC tokens](https://docs.github.com/en/actions/concepts/security/openid-connect)
 to authenticate with emulator.wtf and obtain temporary credentials.
