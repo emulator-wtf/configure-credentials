@@ -8,7 +8,7 @@
   "homepage": "https://github.com/emulator-wtf/configure-credentials",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1",
+    "@actions/core": "^3.0.0",
     "@actions/http-client": "^3.0.0"
   },
   "devDependencies": {
