@@ -9,15 +9,15 @@ without having to explicitly specify an API token. The action relies on
 to authenticate with emulator.wtf and obtain temporary credentials.
 
 > [!WARNING]
+> The `emulator-wtf/configure-credentials` action has moved and is now at
+> `emulator-wtf/actions/configure-credentials`.
 >
 > ```patch
 > - uses: emulator-wtf/configure-credentials@v1
 > + uses: emulator-wtf/actions/configure-credentials@v1.0.0
 > ```
 >
-> The `emulator-wtf/configure-credentials` action has moved and is now at
-> `emulator-wtf/actions/configure-credentials`. We'll keep this action
-> available as a redirect throughout the v1 series of releases.
+> We'll keep this action available as a redirect throughout the v1 series of releases.
 
 ## Quick usage
 
