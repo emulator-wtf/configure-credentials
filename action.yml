@@ -1,5 +1,5 @@
 name: configure-credentials
-description: Github action for configuring emulator.wtf credentials using a GitHub OIDC token
+description: GitHub action for configuring emulator.wtf credentials using a GitHub OIDC token
 inputs:
   oidc-configuration-id:
     description: OIDC configuration ID from the emulator.wtf web app
@@ -8,5 +8,8 @@ branding:
   color: orange
   icon: smartphone
 runs:
-  using: node24
-  main: dist/index.js
+  using: composite
+  steps:
+    - uses: emulator-wtf/actions/configure-credentials@42753a2a6bda2e657741a7385131bf61db464899 # v1.0.0
+      with:
+        oidc-configuration-id: ${{ inputs.oidc-configuration-id }}
