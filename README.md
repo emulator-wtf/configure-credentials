@@ -8,24 +8,35 @@ without having to explicitly specify an API token. The action relies on
 [GitHub OIDC tokens](https://docs.github.com/en/actions/concepts/security/openid-connect)
 to authenticate with emulator.wtf and obtain temporary credentials.
 
+> [!WARNING]
+> The `emulator-wtf/configure-credentials` action has moved and is now at
+> `emulator-wtf/actions/configure-credentials`.
+>
+> ```patch
+> - uses: emulator-wtf/configure-credentials@v1
+> + uses: emulator-wtf/actions/configure-credentials@v1.0.0
+> ```
+>
+> We'll keep this action available as a redirect throughout the v1 series of releases.
+
 ## Quick usage
 
 1. Create a new OIDC configuration in the
    [emulator.wtf web app](https://emulator.wtf).
 2. Add `id-token: write` permission to your workflow YAML. You'll most likely
    want the `contents: read` permission too to check out your repository.
-   
+
    ```yaml
    permissions:
      contents: read
      id-token: write
    ```
 
-3. Invoke the `emulator-wtf/configure-credentials` action with the OIDC
+3. Invoke the `emulator-wtf/actions/configure-credentials` action with the OIDC
    configuration ID added in step 1.
 
    ```yaml
-   - uses: emulator-wtf/configure-credentials@v1
+   - uses: emulator-wtf/actions/configure-credentials@v1.0.0
      with:
        oidc-configuration-id: **OIDC-CONFIGURATION-ID-GOES-HERE**
    ```
@@ -55,13 +66,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
-    - uses: actions/setup-java@v5
-      with:
-        distribution: 'zulu'
-        java-version: '24'
-    - uses: emulator-wtf/configure-credentials@v1
-      with:
-        oidc-configuration-id: **OIDC-CONFIGURATION-ID-GOES-HERE**
-    - run: ./gradlew testWithEmulatorWtf
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '25'
+      - uses: emulator-wtf/actions/configure-credentials@v1.0.0
+        with:
+          oidc-configuration-id: **OIDC-CONFIGURATION-ID-GOES-HERE**
+      - run: ./gradlew testWithEmulatorWtf
 ```
