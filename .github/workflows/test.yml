@@ -12,9 +12,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
+    - uses: jdx/mise-action@v4.0.1 # zizmor: ignore[unpinned-uses] immutable tag
+    - run: mise lint
     - uses: ./
       with:
         oidc-configuration-id: '414eac8b-5d17-4860-915f-37329ceb1dff'
-    - uses: emulator-wtf/actions/setup-ew-cli@v1.0.0
+    - uses: emulator-wtf/actions/setup-ew-cli@v1.0.0 # zizmor: ignore[unpinned-uses] immutable tag
     - run: ew-cli --models
