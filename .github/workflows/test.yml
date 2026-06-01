@@ -20,5 +20,5 @@ jobs:
     - uses: ./
       with:
         oidc-configuration-id: '414eac8b-5d17-4860-915f-37329ceb1dff'
-    - uses: emulator-wtf/actions/setup-ew-cli@v1.0.0 # zizmor: ignore[unpinned-uses] immutable tag
+    - uses: emulator-wtf/actions/setup-ew-cli@v1.0.1 # zizmor: ignore[unpinned-uses] immutable tag
     - run: ew-cli --models
