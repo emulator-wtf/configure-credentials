@@ -37,6 +37,9 @@ to authenticate with emulator.wtf and obtain temporary credentials.
 
    ```yaml
    - uses: emulator-wtf/actions/configure-credentials@v1.1.0
+     with:
+       oidc-configuration-id: **OIDC-CONFIGURATION-ID-GOES-HERE**
+   ```
 
 4. Invoke `ew-cli`, emulator.wtf Gradle Plugin or any of the `emulator-wtf/*`
    GitHub actions without having to pass in an API token.
