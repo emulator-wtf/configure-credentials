@@ -10,6 +10,6 @@ branding:
 runs:
   using: composite
   steps:
-    - uses: emulator-wtf/actions/configure-credentials@1a96fbe11f971a7f9da7d5e80eda476909224c78  # v1.0.1
+    - uses: emulator-wtf/actions/configure-credentials@72f86422814fad7432a286a1b29699cc9e73d561  # v1.1.0
       with:
         oidc-configuration-id: ${{ inputs.oidc-configuration-id }}
